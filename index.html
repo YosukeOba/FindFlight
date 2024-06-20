@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅行予算検索</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>旅行予算検索</h1>
+        <form id="budget-form">
+            <label for="departure">出発地:</label>
+            <select id="departure">
+                <option value="NRT">成田</option>
+                <option value="HND">羽田</option>
+                <option value="KIX">関西</option>
+                <!-- 他の出発地を追加 -->
+            </select>
+            <label for="budget">予算 (円):</label>
+            <input type="number" id="budget" required>
+            <button type="submit">検索</button>
+        </form>
+        <div id="results"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
