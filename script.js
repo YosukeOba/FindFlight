@@ -16,14 +16,36 @@ document.getElementById('budget-form').addEventListener('submit', async function
         console.log(data);
         
         resultsDiv.innerHTML = '';
-        
-        if (data.flights && data.flights.length === 0) {
+
+        if (data.itineraries && data.itineraries.length === 0) {
             resultsDiv.innerHTML = '該当する目的地が見つかりませんでした。';
         } else {
-            data.flights.forEach(flight => {
+            data.itineraries.forEach(itinerary => {
                 const item = document.createElement('div');
                 item.className = 'result-item';
-                item.textContent = `目的地: ${flight.destination}, 価格: ${flight.price}円`;
+                
+                const legIds = itinerary.leg_ids;
+                const legs = data.legs.filter(leg => legIds.includes(leg.id));
+                
+                legs.forEach(leg => {
+                    const flightInfo = document.createElement('div');
+                    flightInfo.className = 'flight-info';
+                    flightInfo.innerHTML = `
+                        <p>出発日時: ${new Date(leg.departure).toLocaleString()}</p>
+                        <p>出発地: ${leg.origin_place_id}</p>
+                        <p>到着地: ${leg.destination_place_id}</p>
+                        <p>搭乗時間: ${leg.duration}分</p>
+                    `;
+                    item.appendChild(flightInfo);
+                });
+
+                const priceInfo = document.createElement('div');
+                priceInfo.className = 'flight-info';
+                priceInfo.innerHTML = `
+                    <p>料金: ${itinerary.cheapest_price.amount}円</p>
+                `;
+                item.appendChild(priceInfo);
+
                 resultsDiv.appendChild(item);
             });
         }
