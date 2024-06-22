@@ -7,7 +7,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     resultsDiv.innerHTML = '検索中...';
 
     //const apiKey = 'YOUR_API_KEY'; // ここに取得したAPIキーを入力します
-    const url = `https://api.flightapi.io/onewaytrip/66741cc03b71ee8dea107175/HEL/OUL/2024-07-20/1/0/0/Economy/USD`;
+    const url = `https://api.flightapi.io/onewaytrip/66741cc03b71ee8dea107175/NRT/LAX/2024-07-20/1/0/0/Economy/USD`;
     
     try {
         const response = await fetch(url);
