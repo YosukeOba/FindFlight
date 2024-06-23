@@ -3,11 +3,13 @@ document.getElementById('budget-form').addEventListener('submit', async function
     
     const departure = document.getElementById('departure').value;
     const budget = document.getElementById('budget').value;
+    const departureDate = document.getElementById('departure-date').value;
+    const returnDate = document.getElementById('return-date').value;
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '検索中...';
 
-    //const apiKey = 'YOUR_API_KEY'; // ここに取得したAPIキーを入力します
-    const url = `https://api.flightapi.io/onewaytrip/66741cc03b71ee8dea107175/${departure}/LAX/2024-07-20/1/0/0/Economy/JPY`;
+    const apiKey = '6676fb181ebc408dca72b96c'; // ここに取得したAPIキーを入力します
+    const url = `https://api.flightapi.io/roundtrip/${apiKey}/${departure}/LAX/${departureDate}/${returnDate}/1/0/0/Economy/JPY`;
     
     try {
         const response = await fetch(url);
