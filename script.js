@@ -48,6 +48,12 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 `;
                 item.appendChild(priceInfo);
 
+                const bookingLink = document.createElement('a');
+                bookingLink.href = `https://www.skyscanner.net${itinerary.pricing_options[0].items[0].url}`;
+                bookingLink.textContent = "サイト＞";
+                bookingLink.target = "_blank";
+                item.appendChild(bookingLink);
+
                 resultsDiv.appendChild(item);
             });
         }
