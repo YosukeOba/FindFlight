@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>旅行予算検索</title>
+    <title>制約は予算だけ、行き先は無限大</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>旅行予算検索</h1>
+        <h1>制約は予算だけ、行き先は無限大</h1>
         <form id="budget-form">
             <label for="departure">出発地:</label>
             <select id="departure">
@@ -25,6 +25,16 @@
             <input type="number" id="budget" required>
             <button type="submit">検索</button>
         </form>
+        <div class="explanation">
+            <div class="explanation-block">
+                <h2>決めるのは予算のみ</h2>
+                <p>あなたが入力した出発地と日程のうち、予算内の行き先を探し出します。</p>
+            </div>
+            <div class="explanation-block">
+                <h2>24サービスを横断検索</h2>
+                <p>様々な航空券検索サービス、公式サイトから横断的にチケットを探し出します。</p>
+            </div>
+        </div>
         <div id="results"></div>
     </div>
     <script src="script.js"></script>
