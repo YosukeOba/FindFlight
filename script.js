@@ -13,7 +13,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
         //{name: '伊丹', IATA: 'ITM'}
     ];
 
-    const apiKey = '667c129c5e7332748c72a469'; // ここに取得したAPIキーを入力します
+    const apiKey = '667c39e037561a749491ea87'; // ここに取得したAPIキーを入力します
 
     let allResults = [];
 
