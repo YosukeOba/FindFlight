@@ -9,8 +9,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
     resultsDiv.innerHTML = '検索中...';
 
     const destinations = [
-        {name: '那覇', IATA: 'OKA'},
-        {name: '伊丹', IATA: 'ITM'}
+        {name: '那覇', IATA: 'OKA'}
+        //{name: '伊丹', IATA: 'ITM'}
     ];
 
     const apiKey = '6676fb181ebc408dca72b96c'; // ここに取得したAPIキーを入力します
