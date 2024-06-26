@@ -13,7 +13,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
         //{name: '伊丹', IATA: 'ITM'}
     ];
 
-    const apiKey = '6676fb181ebc408dca72b96c'; // ここに取得したAPIキーを入力します
+    const apiKey = '667c129c5e7332748c72a469'; // ここに取得したAPIキーを入力します
 
     let allResults = [];
 
@@ -28,7 +28,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 data.itineraries.forEach(itinerary => {
                     // 予算以下のフライトのみ追加
                     if (itinerary.cheapest_price.amount <= budget) {
-                        allResults.push({itinerary: itinerary, legs: data.legs});
+                        allResults.push({itinerary: itinerary, legs: data.legs, destination: destination});
                     }
                 });
             }
@@ -48,6 +48,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
         allResults.forEach(result => {
             const itinerary = result.itinerary;
             const legs = result.legs.filter(leg => itinerary.leg_ids.includes(leg.id));
+            const destination = result.destination;
             
             const item = document.createElement('div');
             item.className = 'result-item';
@@ -58,7 +59,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 flightInfo.innerHTML = `
                     <p>出発日時: ${new Date(leg.departure).toLocaleString()}</p>
                     <p>出発地: ${departure}</p>
-                    <p>到着地: ${destinations.find(dest => dest.IATA === leg.destination_place_id).name}</p>
+                    <p>到着地: ${destination.name}</p>
                     <p>搭乗時間: ${leg.duration}分</p>
                 `;
                 item.appendChild(flightInfo);
