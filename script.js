@@ -9,8 +9,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
     resultsDiv.innerHTML = '検索中...';
 
     const destinations = [
-        {name: '那覇', IATA: 'OKA'}
-        //{name: '伊丹', IATA: 'ITM'}
+        {name: '那覇', IATA: 'OKA'},
+        {name: '伊丹', IATA: 'ITM'}
     ];
 
     const apiKey = '667c39e037561a749491ea87'; // ここに取得したAPIキーを入力します
@@ -79,8 +79,5 @@ document.getElementById('budget-form').addEventListener('submit', async function
 
             resultsDiv.appendChild(item);
         });
-
-        // 結果が表示された後にスクロールして結果を見えるようにする
-        resultsDiv.scrollIntoView({ behavior: 'smooth' });
     }
 });
