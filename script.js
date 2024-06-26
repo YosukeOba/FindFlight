@@ -10,7 +10,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
 
     const destinations = [
         {name: '那覇', IATA: 'OKA'}
-        //{name: '伊丹', IATA: 'ITM'}
+        {name: '伊丹', IATA: 'ITM'}
     ];
 
     const apiKey = '667c129c5e7332748c72a469'; // ここに取得したAPIキーを入力します
@@ -58,7 +58,6 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 flightInfo.className = 'flight-info';
                 flightInfo.innerHTML = `
                     <p>出発日時: ${new Date(leg.departure).toLocaleString()}</p>
-                    <p>出発地: ${departure}</p>
                     <p>到着地: ${destination.name}</p>
                     <p>搭乗時間: ${leg.duration}分</p>
                 `;
