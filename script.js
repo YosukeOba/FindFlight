@@ -9,7 +9,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     resultsDiv.innerHTML = '検索中...';
 
     const destinations = [
-        {name: '那覇', IATA: 'OKA'}
+        {name: '那覇', IATA: 'OKA'},
         {name: '伊丹', IATA: 'ITM'}
     ];
 
