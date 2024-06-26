@@ -1,12 +1,11 @@
-body {
+html, body {
     font-family: Arial, sans-serif;
     background-color: #f0f8ff;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    overflow: auto;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .container {
@@ -16,6 +15,11 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
     border-radius: 10px;
     text-align: center;
+    margin: auto;
+    min-height: 100vh; /* 最小高さを設定して見切れを防ぐ */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
@@ -36,7 +40,7 @@ label {
     margin-bottom: 5px;
 }
 
-input, select, button {
+.input-field {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -44,7 +48,16 @@ input, select, button {
     max-width: 300px;
 }
 
+.full-width {
+    width: 100%;
+}
+
 button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
     background-color: #28a745;
     color: #fff;
     cursor: pointer;
@@ -59,7 +72,7 @@ button:hover {
     display: flex;
     justify-content: space-around;
     margin-top: 30px;
-    gap: 20px; /* 隙間を追加 */
+    gap: 20px;
 }
 
 .explanation-block {
@@ -79,8 +92,13 @@ button:hover {
     color: #666;
 }
 
-#results {
+#results-container {
     margin-top: 30px;
+    width: 100%;
+}
+
+#results {
+    margin-top: 20px;
 }
 
 .result-item {
