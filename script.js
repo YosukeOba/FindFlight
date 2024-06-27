@@ -1,4 +1,5 @@
 // ver 2.1 検索結果の表示を一新
+// ver 2.2 料金と「サイト＞」を横並びに
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -96,6 +97,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 const priceInfo = document.createElement('div');
                 priceInfo.className = 'flight-info';
                 priceInfo.style.textAlign = 'center';
+                priceInfo.style.display = 'inline-block';
+                priceInfo.style.width = '70%';
                 priceInfo.innerHTML = `
                     <h3>料金: ${flight.purchaseLinks[0].totalPrice} 円</h3>
                 `;
@@ -105,6 +108,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 bookingLink.href = flight.purchaseLinks[0].url;
                 bookingLink.textContent = "サイト＞";
                 bookingLink.target = "_blank";
+                bookingLink.style.display = 'inline-block';
+                bookingLink.style.width = '30%';
                 bookingLink.style.float = 'right';
                 item.appendChild(bookingLink);
 
@@ -153,6 +158,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
                         const priceInfo = document.createElement('div');
                         priceInfo.className = 'flight-info';
                         priceInfo.style.textAlign = 'center';
+                        priceInfo.style.display = 'inline-block';
+                        priceInfo.style.width = '70%';
                         priceInfo.innerHTML = `
                             <h3>料金: ${flight.purchaseLinks[0].totalPrice} 円</h3>
                         `;
@@ -162,6 +169,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
                         bookingLink.href = flight.purchaseLinks[0].url;
                         bookingLink.textContent = "サイト＞";
                         bookingLink.target = '_blank';
+                        bookingLink.style.display = 'inline-block';
+                        bookingLink.style.width = '30%';
                         bookingLink.style.float = 'right';
                         item.appendChild(bookingLink);
 
