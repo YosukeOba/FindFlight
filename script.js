@@ -18,7 +18,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     let allResults = [];
 
     for (const destination of destinations) {
-        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlightsMultiCity?legs=%5B%7B%22sourceAirportCode%22%3A%22${departure}%22%2C%22destinationAirportCode%22%3A%22${destination.IATA}%22%2C%22date%22%3A%22${departureDate}%22%7D%2C%7B%22sourceAirportCode%22%3A%22${destination.IATA}%22%2C%22destinationAirportCode%22%3A%22${departure}%22%2C%22date%22%3A%22${returnDate}%22%7D%5D&classOfService=ECONOMY&sortOrder=PRICE&currencyCode=JPY`;
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&departureDate=${departureDate}&returnDate=${returnDate}&classOfService=ECONOMY&sortOrder=PRICE&currencyCode=JPY`;
         
         const options = {
             method: 'GET',
