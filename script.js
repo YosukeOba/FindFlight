@@ -13,29 +13,27 @@ document.getElementById('budget-form').addEventListener('submit', async function
         //{name: '伊丹', IATA: 'ITM'}
     ];
 
-    const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // ここに取得したAPIキーを入力します
+    const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // Replace with your actual API key
 
     let allResults = [];
 
     for (const destination of destinations) {
-        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&departureDate=${departureDate}&returnDate=${returnDate}&classOfService=ECONOMY&sortOrder=PRICE&currencyCode=JPY`;
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&currencyCode=USD`;
         
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': apiKey,
-                'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
-            }
-        };
-
         try {
-            const response = await fetch(url, options);
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': apiKey,
+                    'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
+                }
+            });
             const data = await response.json();
             
-            if (data.flights) {
-                data.flights.forEach(flight => {
-                    // 予算以下のフライトのみ追加
-                    if (flight.price < budget) {
+            if (data.data.flights) {
+                data.data.flights.forEach(flight => {
+                    const price = flight.purchaseLinks[0].totalPrice;
+                    if (price <= budget) {
                         allResults.push({flight: flight, destination: destination});
                     }
                 });
@@ -50,8 +48,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     if (allResults.length === 0) {
         resultsDiv.innerHTML = '該当する目的地が見つかりませんでした。';
     } else {
-        // priceで昇順にソート
-        allResults.sort((a, b) => a.flight.price - b.flight.price);
+        allResults.sort((a, b) => a.flight.purchaseLinks[0].totalPrice - b.flight.purchaseLinks[0].totalPrice);
 
         allResults.forEach(result => {
             const flight = result.flight;
@@ -59,18 +56,29 @@ document.getElementById('budget-form').addEventListener('submit', async function
             
             const item = document.createElement('div');
             item.className = 'result-item';
+            
+            flight.segments.forEach(segment => {
+                segment.legs.forEach(leg => {
+                    const flightInfo = document.createElement('div');
+                    flightInfo.className = 'flight-info';
+                    flightInfo.innerHTML = `
+                        <p>出発日時: ${new Date(leg.departureDateTime).toLocaleString()}</p>
+                        <p>到着地: ${destination.name}</p>
+                        <p>搭乗時間: ${leg.distanceInKM} km</p>
+                    `;
+                    item.appendChild(flightInfo);
+                });
+            });
 
-            const flightInfo = document.createElement('div');
-            flightInfo.className = 'flight-info';
-            flightInfo.innerHTML = `
-                <p>出発地: ${departure}</p>
-                <p>到着地: ${destination.name}</p>
-                <p>料金: ${flight.price}円</p>
+            const priceInfo = document.createElement('div');
+            priceInfo.className = 'flight-info';
+            priceInfo.innerHTML = `
+                <p>料金: ${flight.purchaseLinks[0].totalPrice} USD</p>
             `;
-            item.appendChild(flightInfo);
+            item.appendChild(priceInfo);
 
             const bookingLink = document.createElement('a');
-            bookingLink.href = flight.deepLink;
+            bookingLink.href = flight.purchaseLinks[0].url;
             bookingLink.textContent = "サイト＞";
             bookingLink.target = "_blank";
             item.appendChild(bookingLink);
