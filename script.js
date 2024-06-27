@@ -1,4 +1,4 @@
-// ver 0.1
+// ver 1.1
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -19,7 +19,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     let allResults = [];
 
     for (const destination of destinations) {
-        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&currencyCode=USD`;
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&currencyCode=JPY`;
         
         try {
             const response = await fetch(url, {
