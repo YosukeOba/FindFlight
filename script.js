@@ -56,7 +56,6 @@ document.getElementById('budget-form').addEventListener('submit', async function
             destinationBlock.className = 'destination-block';
 
             if (flights.length > 0){
-
             const destinationTitle = document.createElement('h3');
             destinationTitle.textContent = destination.name;
             destinationBlock.appendChild(destinationTitle);
