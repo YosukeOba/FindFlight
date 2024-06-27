@@ -97,7 +97,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 priceInfo.className = 'flight-info';
                 priceInfo.style.textAlign = 'center';
                 priceInfo.innerHTML = `
-                    <p>料金: ${flight.purchaseLinks[0].totalPrice} 円</p>
+                    <h3>料金: ${flight.purchaseLinks[0].totalPrice} 円</h3>
                 `;
                 item.appendChild(priceInfo);
 
@@ -154,7 +154,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                         priceInfo.className = 'flight-info';
                         priceInfo.style.textAlign = 'center';
                         priceInfo.innerHTML = `
-                            <p>料金: ${flight.purchaseLinks[0].totalPrice} 円</p>
+                            <h3>料金: ${flight.purchaseLinks[0].totalPrice} 円</h3>
                         `;
                         item.appendChild(priceInfo);
 
@@ -185,5 +185,5 @@ function calculateFlightDuration(departureDateTime, arrivalDateTime) {
     const hours = duration.getUTCHours();
     const minutes = duration.getUTCMinutes();
 
-    return `${hours}時間${minutes}分間`;
+    return `${hours}時間${minutes}分`;
 }
