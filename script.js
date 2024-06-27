@@ -1,5 +1,6 @@
 // ver 2.1 検索結果の表示を一新
 // ver 2.2 料金と「サイト＞」を横並びに
+// ver 2.3 行き先にフライトがない場合は、行き先名も表示しない
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -51,12 +52,14 @@ document.getElementById('budget-form').addEventListener('submit', async function
         for (const [destinationIATA, flights] of Object.entries(allResults)) {
             const destination = destinations.find(dest => dest.IATA === destinationIATA);
 
+            if (flights.length > 0){
             const destinationBlock = document.createElement('div');
             destinationBlock.className = 'destination-block';
 
             const destinationTitle = document.createElement('h3');
             destinationTitle.textContent = destination.name;
             destinationBlock.appendChild(destinationTitle);
+            }
 
             const flightsToShow = flights.slice(0, 5);
             flightsToShow.forEach(flight => {
