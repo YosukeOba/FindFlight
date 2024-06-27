@@ -1,4 +1,4 @@
-// ver 2.0 行き先ごとに検索結果を出す 先頭５つのみ表示 もっと見るボタンの追加
+// ver 2.1 検索結果の表示を一新
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -15,7 +15,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
         {name: '伊丹', IATA: 'ITM'}
     ];
 
-    const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02';
+    const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // Replace with your actual API key
 
     let allResults = {};
 
@@ -61,23 +61,41 @@ document.getElementById('budget-form').addEventListener('submit', async function
             flightsToShow.forEach(flight => {
                 const item = document.createElement('div');
                 item.className = 'result-item';
-                
-                flight.segments.forEach(segment => {
-                    segment.legs.forEach(leg => {
-                        const flightInfo = document.createElement('div');
-                        flightInfo.className = 'flight-info';
-                        const duration = calculateFlightDuration(leg.departureDateTime, leg.arrivalDateTime);
-                        flightInfo.innerHTML = `
-                            <p>出発: ${new Date(leg.departureDateTime).toLocaleString()}</p>
-                            <p>到着: ${new Date(leg.arrivalDateTime).toLocaleString()}</p>
-                            <p>搭乗時間: ${duration}</p>
-                        `;
-                        item.appendChild(flightInfo);
-                    });
-                });
+
+                const onwardSegment = flight.segments[0].legs[0];
+                const returnSegment = flight.segments[1].legs[0];
+
+                const onwardInfo = document.createElement('div');
+                onwardInfo.className = 'flight-info';
+                onwardInfo.style.display = 'inline-block';
+                onwardInfo.style.width = '45%';
+                onwardInfo.style.verticalAlign = 'top';
+                const onwardDuration = calculateFlightDuration(onwardSegment.departureDateTime, onwardSegment.arrivalDateTime);
+                onwardInfo.innerHTML = `
+                    <h4>往路</h4>
+                    <p>出発: ${new Date(onwardSegment.departureDateTime).toLocaleString()}</p>
+                    <p>到着: ${new Date(onwardSegment.arrivalDateTime).toLocaleString()}</p>
+                    <p>搭乗時間: ${onwardDuration}</p>
+                `;
+                item.appendChild(onwardInfo);
+
+                const returnInfo = document.createElement('div');
+                returnInfo.className = 'flight-info';
+                returnInfo.style.display = 'inline-block';
+                returnInfo.style.width = '45%';
+                returnInfo.style.verticalAlign = 'top';
+                const returnDuration = calculateFlightDuration(returnSegment.departureDateTime, returnSegment.arrivalDateTime);
+                returnInfo.innerHTML = `
+                    <h4>復路</h4>
+                    <p>出発: ${new Date(returnSegment.departureDateTime).toLocaleString()}</p>
+                    <p>到着: ${new Date(returnSegment.arrivalDateTime).toLocaleString()}</p>
+                    <p>搭乗時間: ${returnDuration}</p>
+                `;
+                item.appendChild(returnInfo);
 
                 const priceInfo = document.createElement('div');
                 priceInfo.className = 'flight-info';
+                priceInfo.style.textAlign = 'center';
                 priceInfo.innerHTML = `
                     <p>料金: ${flight.purchaseLinks[0].totalPrice} 円</p>
                 `;
@@ -87,6 +105,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 bookingLink.href = flight.purchaseLinks[0].url;
                 bookingLink.textContent = "サイト＞";
                 bookingLink.target = "_blank";
+                bookingLink.style.float = 'right';
                 item.appendChild(bookingLink);
 
                 destinationBlock.appendChild(item);
@@ -100,22 +119,40 @@ document.getElementById('budget-form').addEventListener('submit', async function
                         const item = document.createElement('div');
                         item.className = 'result-item';
 
-                        flight.segments.forEach(segment => {
-                            segment.legs.forEach(leg => {
-                                const flightInfo = document.createElement('div');
-                                flightInfo.className = 'flight-info';
-                                const duration = calculateFlightDuration(leg.departureDateTime, leg.arrivalDateTime);
-                                flightInfo.innerHTML = `
-                                    <p>出発: ${new Date(leg.departureDateTime).toLocaleString()}</p>
-                                    <p>到着: ${new Date(leg.arrivalDateTime).toLocaleString()}</p>
-                                    <p>搭乗時間: ${duration}</p>
-                                `;
-                                item.appendChild(flightInfo);
-                            });
-                        });
+                        const onwardSegment = flight.segments[0].legs[0];
+                        const returnSegment = flight.segments[1].legs[0];
+
+                        const onwardInfo = document.createElement('div');
+                        onwardInfo.className = 'flight-info';
+                        onwardInfo.style.display = 'inline-block';
+                        onwardInfo.style.width = '45%';
+                        onwardInfo.style.verticalAlign = 'top';
+                        const onwardDuration = calculateFlightDuration(onwardSegment.departureDateTime, onwardSegment.arrivalDateTime);
+                        onwardInfo.innerHTML = `
+                            <h4>往路</h4>
+                            <p>出発: ${new Date(onwardSegment.departureDateTime).toLocaleString()}</p>
+                            <p>到着: ${new Date(onwardSegment.arrivalDateTime).toLocaleString()}</p>
+                            <p>搭乗時間: ${onwardDuration}</p>
+                        `;
+                        item.appendChild(onwardInfo);
+
+                        const returnInfo = document.createElement('div');
+                        returnInfo.className = 'flight-info';
+                        returnInfo.style.display = 'inline-block';
+                        returnInfo.style.width = '45%';
+                        returnInfo.style.verticalAlign = 'top';
+                        const returnDuration = calculateFlightDuration(returnSegment.departureDateTime, returnSegment.arrivalDateTime);
+                        returnInfo.innerHTML = `
+                            <h4>復路</h4>
+                            <p>出発: ${new Date(returnSegment.departureDateTime).toLocaleString()}</p>
+                            <p>到着: ${new Date(returnSegment.arrivalDateTime).toLocaleString()}</p>
+                            <p>搭乗時間: ${returnDuration}</p>
+                        `;
+                        item.appendChild(returnInfo);
 
                         const priceInfo = document.createElement('div');
                         priceInfo.className = 'flight-info';
+                        priceInfo.style.textAlign = 'center';
                         priceInfo.innerHTML = `
                             <p>料金: ${flight.purchaseLinks[0].totalPrice} 円</p>
                         `;
@@ -124,7 +161,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
                         const bookingLink = document.createElement('a');
                         bookingLink.href = flight.purchaseLinks[0].url;
                         bookingLink.textContent = "サイト＞";
-                        bookingLink.target = "_blank";
+                        bookingLink.target = '_blank';
+                        bookingLink.style.float = 'right';
                         item.appendChild(bookingLink);
 
                         destinationBlock.appendChild(item);
