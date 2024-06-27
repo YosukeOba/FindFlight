@@ -1,3 +1,5 @@
+// ver 1.1 日本円に変更
+// ver 1.2 複数行き先を登録
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -13,22 +15,28 @@ document.getElementById('budget-form').addEventListener('submit', async function
         {name: '伊丹', IATA: 'ITM'}
     ];
 
-    const apiKey = '667c39e037561a749491ea87'; // ここに取得したAPIキーを入力します
+    const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // Replace with your actual API key
 
     let allResults = [];
 
     for (const destination of destinations) {
-        const url = `https://api.flightapi.io/roundtrip/${apiKey}/${departure}/${destination.IATA}/${departureDate}/${returnDate}/1/0/0/Economy/JPY`;
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&currencyCode=JPY`;
         
         try {
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': apiKey,
+                    'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
+                }
+            });
             const data = await response.json();
             
-            if (data.itineraries) {
-                data.itineraries.forEach(itinerary => {
-                    // 予算以下のフライトのみ追加
-                    if (itinerary.cheapest_price.amount <= budget) {
-                        allResults.push({itinerary: itinerary, legs: data.legs, destination: destination});
+            if (data.data.flights) {
+                data.data.flights.forEach(flight => {
+                    const price = flight.purchaseLinks[0].totalPrice;
+                    if (price <= budget) {
+                        allResults.push({flight: flight, destination: destination});
                     }
                 });
             }
@@ -42,37 +50,37 @@ document.getElementById('budget-form').addEventListener('submit', async function
     if (allResults.length === 0) {
         resultsDiv.innerHTML = '該当する目的地が見つかりませんでした。';
     } else {
-        // price_amountで昇順にソート
-        allResults.sort((a, b) => a.itinerary.cheapest_price.amount - b.itinerary.cheapest_price.amount);
+        allResults.sort((a, b) => a.flight.purchaseLinks[0].totalPrice - b.flight.purchaseLinks[0].totalPrice);
 
         allResults.forEach(result => {
-            const itinerary = result.itinerary;
-            const legs = result.legs.filter(leg => itinerary.leg_ids.includes(leg.id));
+            const flight = result.flight;
             const destination = result.destination;
             
             const item = document.createElement('div');
             item.className = 'result-item';
             
-            legs.forEach(leg => {
-                const flightInfo = document.createElement('div');
-                flightInfo.className = 'flight-info';
-                flightInfo.innerHTML = `
-                    <p>出発日時: ${new Date(leg.departure).toLocaleString()}</p>
-                    <p>到着地: ${destination.name}</p>
-                    <p>搭乗時間: ${leg.duration}分</p>
-                `;
-                item.appendChild(flightInfo);
+            flight.segments.forEach(segment => {
+                segment.legs.forEach(leg => {
+                    const flightInfo = document.createElement('div');
+                    flightInfo.className = 'flight-info';
+                    flightInfo.innerHTML = `
+                        <p>出発日時: ${new Date(leg.departureDateTime).toLocaleString()}</p>
+                        <p>到着地: ${destination.name}</p>
+                        <p>搭乗時間: ${leg.distanceInKM} km</p>
+                    `;
+                    item.appendChild(flightInfo);
+                });
             });
 
             const priceInfo = document.createElement('div');
             priceInfo.className = 'flight-info';
             priceInfo.innerHTML = `
-                <p>料金: ${itinerary.cheapest_price.amount}円</p>
+                <p>料金: ${flight.purchaseLinks[0].totalPrice} 円</p>
             `;
             item.appendChild(priceInfo);
 
             const bookingLink = document.createElement('a');
-            bookingLink.href = `https://www.skyscanner.net${itinerary.pricing_options[0].items[0].url}`;
+            bookingLink.href = flight.purchaseLinks[0].url;
             bookingLink.textContent = "サイト＞";
             bookingLink.target = "_blank";
             item.appendChild(bookingLink);
