@@ -52,9 +52,10 @@ document.getElementById('budget-form').addEventListener('submit', async function
         for (const [destinationIATA, flights] of Object.entries(allResults)) {
             const destination = destinations.find(dest => dest.IATA === destinationIATA);
 
-            if (flights.length > 0){
             const destinationBlock = document.createElement('div');
             destinationBlock.className = 'destination-block';
+
+            if (flights.length > 0){
 
             const destinationTitle = document.createElement('h3');
             destinationTitle.textContent = destination.name;
