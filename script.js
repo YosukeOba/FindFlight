@@ -1,5 +1,6 @@
 // ver 1.1 日本円に変更
 // ver 1.2 複数行き先を登録
+// ver 1.3 出発日時、搭乗時間を修正
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -20,7 +21,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     let allResults = [];
 
     for (const destination of destinations) {
-        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&currencyCode=JPY`;
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&nonstop=yes&currencyCode=JPY`;
         
         try {
             const response = await fetch(url, {
@@ -63,10 +64,11 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 segment.legs.forEach(leg => {
                     const flightInfo = document.createElement('div');
                     flightInfo.className = 'flight-info';
+                    const duration = calculateFlightDuration(leg.departureDateTime, leg.arrivalDateTime);
                     flightInfo.innerHTML = `
-                        <p>出発日時: ${new Date(leg.departureDateTime).toLocaleString()}</p>
-                        <p>到着地: ${destination.name}</p>
-                        <p>搭乗時間: ${leg.distanceInKM} km</p>
+                        <p>出発: ${new Date(leg.departureDateTime).toLocaleString()}</p>
+                        <p>到着: ${new Date(leg.arrivalDateTime).toLocaleString()}</p>
+                        <p>搭乗時間: ${duration}</p>
                     `;
                     item.appendChild(flightInfo);
                 });
@@ -89,3 +91,14 @@ document.getElementById('budget-form').addEventListener('submit', async function
         });
     }
 });
+
+function calculateFlightDuration(departureDateTime, arrivalDateTime) {
+    const departureTime = new Date(departureDateTime);
+    const arrivalTime = new Date(arrivalDateTime);
+    const duration = new Date(arrivalTime - departureTime);
+
+    const hours = duration.getUTCHours();
+    const minutes = duration.getUTCMinutes();
+
+    return `${hours}時間${minutes}分間`;
+}
