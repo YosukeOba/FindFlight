@@ -1,4 +1,5 @@
-// ver 1.1
+// ver 1.1 日本円に変更
+// ver 1.2 複数行き先を登録
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -10,8 +11,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
     resultsDiv.innerHTML = '検索中...';
 
     const destinations = [
-        {name: '那覇', IATA: 'OKA'}
-        //{name: '伊丹', IATA: 'ITM'}
+        {name: '那覇', IATA: 'OKA'},
+        {name: '伊丹', IATA: 'ITM'}
     ];
 
     const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // Replace with your actual API key
@@ -74,7 +75,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
             const priceInfo = document.createElement('div');
             priceInfo.className = 'flight-info';
             priceInfo.innerHTML = `
-                <p>料金: ${flight.purchaseLinks[0].totalPrice} USD</p>
+                <p>料金: ${flight.purchaseLinks[0].totalPrice} 円</p>
             `;
             item.appendChild(priceInfo);
 
