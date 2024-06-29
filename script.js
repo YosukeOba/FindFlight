@@ -1,6 +1,7 @@
 // ver 2.1 検索結果の表示を一新
 // ver 2.2 料金と「サイト＞」を横並びに
 // ver 2.3 行き先にフライトがない場合は、行き先名も表示しない
+// ver 2.4 新千歳を追加
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -14,7 +15,8 @@ document.getElementById('budget-form').addEventListener('submit', async function
 
     const destinations = [
         {name: '那覇', IATA: 'OKA'},
-        {name: '伊丹', IATA: 'ITM'}
+        {name: '伊丹', IATA: 'ITM'},
+        {name: '新千歳' ,IATA: 'CTS'}
     ];
 
     const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // Replace with your actual API key
