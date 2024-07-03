@@ -16,7 +16,7 @@ html, body {
     border-radius: 10px;
     text-align: center;
     margin: auto;
-    min-height: 100vh; /* 最小高さを設定して見切れを防ぐ */
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
