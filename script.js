@@ -143,6 +143,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                             <p>出発: ${new Date(onwardSegment.departureDateTime).toLocaleString()}</p>
                             <p>到着: ${new Date(onwardSegment.arrivalDateTime).toLocaleString()}</p>
                             <p>搭乗時間: ${onwardDuration}</p>
+                            <p>航空会社: ${onwardSegment.marketingCarrier.displayName}</p>
                         `;
                         item.appendChild(onwardInfo);
 
@@ -157,6 +158,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                             <p>出発: ${new Date(returnSegment.departureDateTime).toLocaleString()}</p>
                             <p>到着: ${new Date(returnSegment.arrivalDateTime).toLocaleString()}</p>
                             <p>搭乗時間: ${returnDuration}</p>
+                            <p>航空会社: ${onwardSegment.marketingCarrier.displayName}</p>
                         `;
                         item.appendChild(returnInfo);
 
