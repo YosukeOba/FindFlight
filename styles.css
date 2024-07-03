@@ -22,6 +22,20 @@ html, body {
     justify-content: center;
 }
 
+.input-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.input-block {
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
 h1 {
     color: #333;
     margin-bottom: 20px;
