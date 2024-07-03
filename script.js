@@ -14,9 +14,9 @@ document.getElementById('budget-form').addEventListener('submit', async function
     resultsDiv.innerHTML = '検索中...';
 
     const destinations = [
-        {name: '那覇', IATA: 'OKA'},
-        {name: '伊丹', IATA: 'ITM'},
-        {name: '新千歳' ,IATA: 'CTS'}
+        {name: '那覇', IATA: 'OKA'}
+        //{name: '伊丹', IATA: 'ITM'},
+        //{name: '新千歳' ,IATA: 'CTS'}
     ];
 
     const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // Replace with your actual API key
