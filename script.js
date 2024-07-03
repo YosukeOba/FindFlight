@@ -1,7 +1,4 @@
-// ver 2.1 検索結果の表示を一新
-// ver 2.2 料金と「サイト＞」を横並びに
-// ver 2.3 行き先にフライトがない場合は、行き先名も表示しない
-// ver 2.4 新千歳を追加
+// ver 3.0 航空会社が結果に表示されるように
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
