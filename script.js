@@ -1,4 +1,5 @@
 // ver 3.0 航空会社が結果に表示されるように
+// var 3.1 行きと帰りで正しく航空会社が表示されるように修正
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -79,6 +80,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                     <p>出発: ${new Date(onwardSegment.departureDateTime).toLocaleString()}</p>
                     <p>到着: ${new Date(onwardSegment.arrivalDateTime).toLocaleString()}</p>
                     <p>搭乗時間: ${onwardDuration}</p>
+                    <p>航空会社: ${onwardSegment.marketingCarrier.displayName}</p>
                 `;
                 item.appendChild(onwardInfo);
 
@@ -93,6 +95,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                     <p>出発: ${new Date(returnSegment.departureDateTime).toLocaleString()}</p>
                     <p>到着: ${new Date(returnSegment.arrivalDateTime).toLocaleString()}</p>
                     <p>搭乗時間: ${returnDuration}</p>
+                    <p>航空会社: ${returnSegment.marketingCarrier.displayName}</p>
                 `;
                 item.appendChild(returnInfo);
 
@@ -155,7 +158,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                             <p>出発: ${new Date(returnSegment.departureDateTime).toLocaleString()}</p>
                             <p>到着: ${new Date(returnSegment.arrivalDateTime).toLocaleString()}</p>
                             <p>搭乗時間: ${returnDuration}</p>
-                            <p>航空会社: ${onwardSegment.marketingCarrier.displayName}</p>
+                            <p>航空会社: ${returnSegment.marketingCarrier.displayName}</p>
                         `;
                         item.appendChild(returnInfo);
 
