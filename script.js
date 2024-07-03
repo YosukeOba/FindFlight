@@ -17,7 +17,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
         //{name: '新千歳' ,IATA: 'CTS'}
     ];
 
-    const apiKey = 'a590ad772dmsha969595af2a3814p1dd3cfjsn81509c26bc02'; // Replace with your actual API key
+    const apiKey = 'a8a8f369dcmshf76679588667b51p1c1eb5jsnd7fcd1a480e9'; // Replace with your actual API key
 
     let allResults = {};
 
