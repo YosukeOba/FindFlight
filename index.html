@@ -3,40 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>制約は予算だけ、行き先は無限大</title>
+    <title>Find Your Best Flight</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>制約は予算だけ、行き先は無限大</h1>
-        <form id="budget-form">
-            <label for="departure">出発地:</label>
-            <select id="departure">
-                <option value="NRT">成田</option>
-                <option value="HND">羽田</option>
-                <option value="KIX">関西</option>
-                <!-- 他の出発地を追加 -->
-            </select>
-            <label for="departure-date">行きの搭乗日:</label>
-            <input type="date" id="departure-date" required>
-            <label for="return-date">帰りの搭乗日:</label>
-            <input type="date" id="return-date" required>
-            <label for="budget">予算 (円):</label>
-            <input type="number" id="budget" required>
-            <button type="submit">検索</button>
-        </form>
-        <div class="explanation">
-            <div class="explanation-block">
-                <h2>決めるのは予算のみ</h2>
-                <p>あなたが入力した出発地と日程のうち、予算内の行き先を探し出します。</p>
+        <div class="form-container">
+            <h1 class="logo">Find Your Best Flight</h1>
+            <form id="flight-form">
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="departure">出発地:</label>
+                        <select id="departure" class="input-field">
+                            <option value="NRT">成田</option>
+                            <option value="HND">羽田</option>
+                            <option value="KIX">関西</option>
+                            <!-- 他の出発地を追加 -->
+                        </select>
+                    </div>
+                    <div class="form-group-spacer"></div>
+                    <div class="form-group">
+                        <label for="budget">予算:</label>
+                        <input type="number" id="budget" class="input-field" required>
+                    </div>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="departure-date">行きの搭乗日:</label>
+                        <input type="date" id="departure-date" class="input-field" required>
+                    </div>
+                    <div class="form-group-spacer"></div>
+                    <div class="form-group">
+                        <label for="return-date">帰りの搭乗日:</label>
+                        <input type="date" id="return-date" class="input-field" required>
+                    </div>
+                </div>
+                <button type="submit">検索</button>
+            </form>
+            <div id="results-container">
+                <div id="results"></div>
             </div>
-            <div class="explanation-block">
-                <h2>24サービスを横断検索</h2>
-                <p>様々な航空券検索サービス、公式サイトから横断的にチケットを探し出します。</p>
-            </div>
-        </div>
-        <div id="results-container">
-            <div id="results"></div>
         </div>
     </div>
     <script src="script.js"></script>
