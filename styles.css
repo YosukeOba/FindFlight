@@ -20,6 +20,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* 濃い目の影を全方位に追加 */
 }
 
 .input-container {
