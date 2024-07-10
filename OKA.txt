@@ -1,0 +1,7 @@
+成田,NRT
+関西,KIX
+神戸,UKB
+福岡,FUK
+中部,NGO
+新千歳,CTS
+茨城,IBR

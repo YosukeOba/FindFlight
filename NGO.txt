@@ -1,0 +1,7 @@
+福岡,FUK
+那覇,OKA
+鹿児島,KOJ
+新千歳,CTS
+成田,NRT
+仙台,SDJ
+神戸,UKB

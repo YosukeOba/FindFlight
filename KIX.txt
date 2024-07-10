@@ -1,0 +1,11 @@
+女満別,MMB
+釧路,KUH
+新千歳,CTS
+仙台,SDJ
+成田,NRT
+福岡,FUK
+長崎,NGS
+鹿児島,KOJ
+奄美,ASJ
+那覇,OKA
+石垣,ISG

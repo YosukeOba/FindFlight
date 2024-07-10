@@ -1,0 +1,10 @@
+新千歳,CTS
+仙台,SDJ
+茨城,IBR
+羽田,HND
+長崎,NGS
+鹿児島,KOJ
+奄美,ASJ
+下地島,SHI
+成田,NRT
+那覇,OKA

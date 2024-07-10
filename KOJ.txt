@@ -1,0 +1,5 @@
+成田,NRT
+羽田,HND
+神戸,UKB
+福岡,FUK
+奄美,ASJ

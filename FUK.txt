@@ -1,0 +1,5 @@
+成田,NRT
+関西,KIX
+那覇,OKA
+新千歳,CTS
+茨城,IBR

@@ -1,0 +1,5 @@
+新千歳,CTS
+成田,NRT
+関西,KIX
+那覇,OKA
+石垣,ISG
