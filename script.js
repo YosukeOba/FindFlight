@@ -2,7 +2,7 @@
 // ver 4.1 destinationsをconstからletに変更
 // ver 4.2 destinationsを空に。destinationsの中身をチェック。
 // ver 4.3 検索結果数を表示
-// ver 4.4 一旦片道にした。pageNumberが謎なので消した。
+// ver 4.4 pageNumberが謎なので消した。
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -14,25 +14,25 @@ document.getElementById('budget-form').addEventListener('submit', async function
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '検索中...';
 
-    let destinations = [];
+    let destinations = [{name: '新千歳' ,IATA: 'CTS'}];
 
-    // departure変数に入っているIATAと同じ名前のtxtファイルを探す
-    const fileName = `${departure}.txt`;
+    // // departure変数に入っているIATAと同じ名前のtxtファイルを探す
+    // const fileName = `${departure}.txt`;
     
-    try {
-        const response = await fetch(fileName);
-        if (response.ok) {
-            const text = await response.text();
-            destinations = text.split('\n').map(line => {
-                const [name, IATA] = line.split(',');
-                return {name: name.trim(), IATA: IATA.trim()};
-            });
-        } else {
-            console.error(`ファイル ${fileName} が見つかりませんでした。`);
-        }
-    } catch (error) {
-        console.error(`エラーが発生しました: ${error}`);
-    }
+    // try {
+    //     const response = await fetch(fileName);
+    //     if (response.ok) {
+    //         const text = await response.text();
+    //         destinations = text.split('\n').map(line => {
+    //             const [name, IATA] = line.split(',');
+    //             return {name: name.trim(), IATA: IATA.trim()};
+    //         });
+    //     } else {
+    //         console.error(`ファイル ${fileName} が見つかりませんでした。`);
+    //     }
+    // } catch (error) {
+    //     console.error(`エラーが発生しました: ${error}`);
+    // }
 
     const apiKey = 'a8a8f369dcmshf76679588667b51p1c1eb5jsnd7fcd1a480e9'; // Replace with your actual API key
 
@@ -43,7 +43,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
         console.log(destination.IATA);
 
         //const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&nonstop=yes&currencyCode=JPY`;
-        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ONE_WAY&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&nonstop=yes&currencyCode=JPY`;
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&nonstop=yes&currencyCode=JPY`;
         
         try {
             const response = await fetch(url, {
