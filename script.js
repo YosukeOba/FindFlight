@@ -1,6 +1,7 @@
 // ver 4.0 txtファイルからの読み込み
 // ver 4.1 destinationsをconstからletに変更
 // ver 4.2 destinationsを空に。destinationsの中身をチェック。
+// ver 4.3 検索結果数を表示
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -72,6 +73,9 @@ document.getElementById('budget-form').addEventListener('submit', async function
 
             const destinationBlock = document.createElement('div');
             destinationBlock.className = 'destination-block';
+
+            console.log(destinationIATA);
+            console.log(flights.length);
 
             if (flights.length > 0){
             const destinationTitle = document.createElement('h3');
