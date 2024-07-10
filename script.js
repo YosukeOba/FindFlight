@@ -1,5 +1,4 @@
-// ver 3.0 航空会社が結果に表示されるように
-// var 3.1 行きと帰りで正しく航空会社が表示されるように修正
+// ver 4.0 txtファイルからの読み込み
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -12,10 +11,28 @@ document.getElementById('budget-form').addEventListener('submit', async function
     resultsDiv.innerHTML = '検索中...';
 
     const destinations = [
-        {name: '那覇', IATA: 'OKA'}
-        //{name: '伊丹', IATA: 'ITM'},
-        //{name: '新千歳' ,IATA: 'CTS'}
+        {name: '那覇', IATA: 'OKA'},
+        {name: '伊丹', IATA: 'ITM'},
+        {name: '新千歳' ,IATA: 'CTS'}
     ];
+
+    // departure変数に入っているIATAと同じ名前のtxtファイルを探す
+    const fileName = `${departure}.txt`;
+    
+    try {
+        const response = await fetch(fileName);
+        if (response.ok) {
+            const text = await response.text();
+            destinations = text.split('\n').map(line => {
+                const [name, IATA] = line.split(',');
+                return {name: name.trim(), IATA: IATA.trim()};
+            });
+        } else {
+            console.error(`ファイル ${fileName} が見つかりませんでした。`);
+        }
+    } catch (error) {
+        console.error(`エラーが発生しました: ${error}`);
+    }
 
     const apiKey = 'a8a8f369dcmshf76679588667b51p1c1eb5jsnd7fcd1a480e9'; // Replace with your actual API key
 
