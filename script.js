@@ -1,4 +1,5 @@
 // ver 4.0 txtファイルからの読み込み
+// ver 4.1 destinationsをconstからletに変更
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -10,7 +11,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '検索中...';
 
-    const destinations = [
+    let destinations = [
         {name: '那覇', IATA: 'OKA'},
         {name: '伊丹', IATA: 'ITM'},
         {name: '新千歳' ,IATA: 'CTS'}
