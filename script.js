@@ -1,5 +1,6 @@
 // ver 4.0 txtファイルからの読み込み
 // ver 4.1 destinationsをconstからletに変更
+// ver 4.2 destinationsを空に。destinationsの中身をチェック。
 
 document.getElementById('budget-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -11,11 +12,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '検索中...';
 
-    let destinations = [
-        {name: '那覇', IATA: 'OKA'},
-        {name: '伊丹', IATA: 'ITM'},
-        {name: '新千歳' ,IATA: 'CTS'}
-    ];
+    let destinations = [];
 
     // departure変数に入っているIATAと同じ名前のtxtファイルを探す
     const fileName = `${departure}.txt`;
@@ -40,6 +37,9 @@ document.getElementById('budget-form').addEventListener('submit', async function
     let allResults = {};
 
     for (const destination of destinations) {
+        console.log(destination.name);
+        console.log(destination.IATA);
+
         const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=${departure}&destinationAirportCode=${destination.IATA}&date=${departureDate}&itineraryType=ROUND_TRIP&sortOrder=PRICE&numAdults=1&numSeniors=0&classOfService=ECONOMY&returnDate=${returnDate}&pageNumber=1&nonstop=yes&currencyCode=JPY`;
         
         try {
