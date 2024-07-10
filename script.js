@@ -55,6 +55,7 @@ document.getElementById('budget-form').addEventListener('submit', async function
                 }
             });
             const data = await response.json();
+            console.log(data);
             
             if (data.data.flights) {
                 allResults[destination.IATA] = data.data.flights
